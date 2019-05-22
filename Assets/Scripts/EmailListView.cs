@@ -8,24 +8,12 @@ public class EmailListView : HomeTestElement
     public Button buttonPrefab;
     public Transform parent;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void showEmailList(List<Email> emails)
     {
         foreach (var email in emails)
         {
             Instantiate(buttonPrefab, parent);
-            buttonPrefab.GetComponentInChildren<Text>().text = "subject:  " + email.subject;
+            buttonPrefab.GetComponentInChildren<Text>().text = "subject:  " + email.content;
             buttonPrefab.GetComponent<SavedMail>().myEmail = email;
         }
     }

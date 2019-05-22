@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class EmailView : HomeTestElement
 {
@@ -95,9 +96,24 @@ public class EmailView : HomeTestElement
 
     public bool isValidEmail(string email)
     {
-        var atSignIndex = email.IndexOf('@');
-        return atSignIndex > 0 &&
-            email.IndexOf('.') > atSignIndex;
+        //var atSignIndex = email.IndexOf('@');
+        //return atSignIndex > 0;
+        //  email.IndexOf('.') > atSignIndex || atSignIndex > 0 && email.IndexOf('.') < atSignIndex && email.IndexOf('.') > atSignIndex;
+
+        string pattern = null;
+        pattern = "^([0-9a-zA-Z]([-\\.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$";
+
+        if (Regex.IsMatch(email, pattern))
+        {
+           Debug.Log("Valid Email address ");
+            return true;
+
+        }
+        else
+        {
+            Debug.Log("Not a valid Email address ");
+            return false;
+        }
     }
 
     public string ValidateEmails()
