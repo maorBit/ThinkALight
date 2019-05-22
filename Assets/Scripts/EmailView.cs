@@ -33,6 +33,7 @@ public class EmailView : HomeTestElement
     }
     public void setData(Email email, bool isReadOnly)
     {
+        sendButton.enabled = !isReadOnly;
         _subject.GetComponentInParent<InputField>().enabled = !isReadOnly;
         _from.GetComponentInParent<InputField>().enabled = !isReadOnly;
         _name.GetComponentInParent<InputField>().enabled = !isReadOnly;
@@ -52,6 +53,10 @@ public class EmailView : HomeTestElement
         var isValid = validateForm();
         if (isValid)
         {
+            string er = "Email Sent Successfully!";
+
+            StartCoroutine(showErrorMessage(er));
+
             Email email = generateEmailFromValues();
             if (OnSendEmail != null)
             {
